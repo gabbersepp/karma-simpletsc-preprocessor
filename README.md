@@ -1,23 +1,23 @@
-# karma-tsc-preprocessor
+# karma-simpletsc-preprocessor
 
-> Karma Preprocessor that compiles your TypeScript files.
+> A simple Karma Preprocessor that compiles your TypeScript files without creating output files.
 
 [![NPM][npm]](https://nodei.co/npm/karma-tsc-preprocessor/)
 
 ## Installation
 
-Add `karma-tsc-preprocessor` as a devDependency in your `package.json`.
+Add `karma-simpletsc-preprocessor` as a devDependency in your `package.json`.
 ```json
     {
       "devDependencies": {
-        "karma-tsc-preprocessor": "0.0.1"
+        "karma-simpletsc-preprocessor": "0.0.1"
       }
     }
 ```
 
 Or just issue the following command:
 ```bash
-npm install karma-tsc-preprocessor --save-dev
+npm install karma-simpletsc-preprocessor --save-dev
 ```
 
 ## Configuration
@@ -30,7 +30,7 @@ Using a `tsconfig.json` file:
             preprocessors: {
                 '**/*.ts': ['tsc']
             },
-            tscPreprocessor: {
+            simpletscPreprocessor: {
                 tsConfig: 'tsconfig.json' // relative to __dirname path
             }
         });
@@ -46,16 +46,15 @@ Using a compilerOptions object:
     			'**/*.ts': ['tsc']
     		},
     
-    		tscPreprocessor: {
+    		simpletscPreprocessor: {
     			compilerOptions: {
-    				module: "umd",
+    				module: "amd",
     				target: "ES5",
     				noImplicitAny: true,
     				removeComments: true,
     				inlineSourceMap: true,
     				preserveConstEnums: true,
-    				sourceRoot: '',
-    				outDir: 'build'
+    				sourceRoot: ''
     			}
     		}
     
@@ -77,4 +76,4 @@ Warning:
 For more information on Karma see the [homepage].
 
 [homepage]: http://karma-runner.github.com
-[npm]: https://nodei.co/npm/karma-tsc-preprocessor.png
+[npm]: https://nodei.co/npm/karma-simpletsc-preprocessor.png

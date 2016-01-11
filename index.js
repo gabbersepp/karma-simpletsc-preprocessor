@@ -1,9 +1,7 @@
 var fs = require('fs');
 var ts = require('typescript');
+var path = require("path");
 
-/**
- *
- */
 var createTscPreprocessor = function(args, config, logger, helper) {
 	config = config || {};
 	var log = logger.create('preprocessor.tsc');
@@ -17,8 +15,7 @@ var createTscPreprocessor = function(args, config, logger, helper) {
 		config = JSON.parse(redfile);
 	}
 
-	config = ts.parseConfigFile(config, { readDirectory: function() { return []; } }, rootPath);
-
+	config = ts.parseJsonConfigFileContent(config, { readDirectory: function() { return []; } }, rootPath);
 
 	if(config.options.sourceMap) {
 		config.options.sourceMap = false;
@@ -37,12 +34,10 @@ var createTscPreprocessor = function(args, config, logger, helper) {
 		delete config.fileNames;
 	}
 
-
 	return function(content, file, done) {
 		log.debug("transpiling: " + file.originalPath);
-
+		
 		var compiledFile = ts.transpile(content, config.options, file.originalPath);
-
 		var filename =  file.originalPath.replace(/\.ts$/, '.js');
 
 		var sourceRoot = config.options.sourceRoot;
@@ -52,8 +47,7 @@ var createTscPreprocessor = function(args, config, logger, helper) {
 			filename = filename.replace(reg, outDir);
 		}
 
-
-		fs.writeFileSync(filename, compiledFile, "utf8");
+		file.path = filename;
 		done(compiledFile);
 	};
 };
