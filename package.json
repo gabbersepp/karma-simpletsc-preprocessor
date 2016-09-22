@@ -1,6 +1,6 @@
 {
   "name": "karma-simpletsc-preprocessor",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple karma-runner plugin to compile typescript files",
   "license": "MIT",
   "homepage": "https://github.com/gabbersepp/karma-simpletsc-preprocessor",
