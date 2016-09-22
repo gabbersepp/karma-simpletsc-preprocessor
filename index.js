@@ -37,7 +37,26 @@ var createTscPreprocessor = function(args, config, logger, helper) {
 	return function(content, file, done) {
 		log.debug("transpiling: " + file.originalPath);
 		
-		var compiledFile = ts.transpile(content, config.options, file.originalPath);
+		var diag = [];
+		
+		var compiledFile = ts.transpile(content, config.options, file.originalPath, diag);
+
+		for(var d = 0; d < diag.length; d++) {
+			var lineMap = diag[d].file.lineMap;
+			var line = diag[d].start + 2;
+			console.log(line);
+			var found;
+			
+			for(var i = 0; i < lineMap.length; i++) {
+				if (lineMap[i] == line) {
+					found = i;
+					break;
+				}
+			}
+			
+			console.error("Line: " + found + ", Message: " + diag[d].messageText);
+		}
+		
 		var filename =  file.originalPath.replace(/\.ts$/, '.js');
 
 		var sourceRoot = config.options.sourceRoot;
