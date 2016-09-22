@@ -2,7 +2,7 @@
 
 > A simple Karma Preprocessor that compiles your TypeScript files without creating output files.
 
-[![NPM][npm]](https://nodei.co/npm/karma-tsc-preprocessor/)
+[![NPM][npm]](https://nodei.co/npm/karma-simpletsc-preprocessor/)
 
 ## Installation
 
